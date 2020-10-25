@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js "></script>
+    <script src="manage.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form action="/create" method="post">
+                <div class="row">
+                    <h1>Voeg een entry toe</h1>
+                </div>
+                <div class="row">
+                    <input type="text" name="content" placeholder="content" id="creationContent">
+                    <select name="type" id="creationType">
+                        <option value="text">text</option>
+                        <option value="image">image URL</option>
+                    </select>
+                </div>
+            </form>
+            <div class="row">
+                <button onclick="create();" class="btn-sm btn-secondary">
+                    Uitvoeren
+                </button>
+            </div>
+            <div class="row">
+                <div id="createInfo"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form action="/edit" method="post">
+                <div class="row">
+                    <h1>Wijzig een entry</h1>
+                </div>
+                <div class="row">
+                    <input type="text" name="id" placeholder="ID" id="editID">
+                    <input type="text" name="content" placeholder="content" id="editContent">
+                    <select name="type" id="editType">
+                        <option value="text">text</option>
+                        <option value="image">image URL</option>
+                    </select>
+                </div>
+            </form>
+            <div class="row">
+                <button onclick="edit();" class="btn-sm btn-secondary">
+                    Uitvoeren
+                </button>
+            </div>
+            <div class="row">
+                <div id="editInfo"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form>
+                <div class="row">
+                    <h1>Verwijder een entry</h1>
+                </div>
+                <div class="row">
+                    <input type="text" name="removeID" placeholder="ID" id="removeID">
+                </div>
+            </form>
+            <div class="row">
+                <button onclick="remove();" class="btn-sm btn-secondary">
+                    Uitvoeren
+                </button>
+            </div>
+            <div class="row">
+                <div id="removeResult"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form>
+                <div class="row">
+                    <h1>Haal een entry op</h1>
+                </div>
+                <div class="row">
+                    <input type="text" name="retrieveID" placeholder="ID" id="retrieveID">
+                </div>
+            </form>
+            <div class="row">
+                <button onclick="retrieve();" class="btn-sm btn-secondary">
+                    Uitvoeren
+                </button>
+            </div>
+            <div class="row">
+                <div id="retrieveResult"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="row">
+                <h1>Print alle entries</h1>
+            </div>
+            <div class="row">
+                <button onclick="getAllEntries();" class="btn btn-secondary">
+                    Uitvoeren
+                </button>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>content</th>
+                        <th>type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="allEntries"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
