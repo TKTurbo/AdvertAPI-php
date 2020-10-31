@@ -1,19 +1,9 @@
 <?php
 
-// phpinfo();
-
 require_once('classes/db.php');
-
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'advertapi';
-
-const key = 'testKey672138'; // for authentication
-
-$DB = new db($host, $user, $pass, $db);
-
-//echo $_SERVER['REQUEST_URI'];
+$dbString = file_get_contents("data/db.json");
+$dbJSON = json_decode($dbString, true);
+$DB = new db($dbJSON['host'], $dbJSON['user'], $dbJSON['pass'], $dbJSON['db']);
 
 /**
  * The route for retrieving content using the ID parameter
@@ -36,4 +26,5 @@ if ($DB->connect()) {
             echo 'Geen entries met dit ID gevonden';
         }
     }
+    $DB->close();
 }

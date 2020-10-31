@@ -6,7 +6,7 @@ class db
     private $user;
     private $pass;
     private $db;
-    private $pdo;
+    public $pdo;
     public $query;
 
     public function __construct($host, $user, $pass, $db)

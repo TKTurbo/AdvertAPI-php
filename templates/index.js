@@ -39,10 +39,7 @@ window.onload = function () {
  * for retrieving data
  */
 function retrieve() {  // TODO: sanitize?
-    const url = window.location.origin + '/?id=' + retrieveID.value;
-    // axios.get(url, (req, res) => {
-    //     console.log(res);
-    // }
+    const url = getURL() + '?id=' + retrieveID.value;
 
     console.log(url);
     axios.get(url, {}).then(function (res) {
@@ -59,7 +56,7 @@ function retrieve() {  // TODO: sanitize?
 }
 
 function create() { // TODO: sanitize?
-    const url = window.location.origin + '/create' + window.location.search; // window.location.search is the parameter including the key
+    const url = getURL() + 'create.php' + window.location.search; // window.location.search is the parameter including the key
     axios.post(url, {
         content: creationContent.value,
         type: creationType.value
@@ -74,7 +71,7 @@ function create() { // TODO: sanitize?
 }
 
 function edit() { // TODO: sanitize?
-    const url = window.location.origin + '/edit' + window.location.search; // window.location.search is the parameter including the key
+    const url = getURL() + 'edit.php' + window.location.search; // window.location.search is the parameter including the key
     axios.post(url, {
         id: editID.value,
         content: editContent.value,
@@ -92,7 +89,7 @@ function edit() { // TODO: sanitize?
 }
 
 function remove() {
-    const url = window.location.origin + '/remove' + window.location.search; // window.location.search is the parameter including the key
+    const url = getURL() + 'remove.php' + window.location.search; // window.location.search is the parameter including the key
     axios.post(url, {
         id: removeID.value,
     })
@@ -107,12 +104,12 @@ function remove() {
 }
 
 function getAllEntries() {
-    const url = window.location.origin + '/all' + window.location.search;
+    allEntries.innerHTML = '';
+    const url = getURL() + 'all.php' + window.location.search;
 
     console.log(url);
     axios.get(url).then(function (res) {
-        console.log(res.data);
-        // allEntries.innerHTML = res.data;
+        console.log(res);
         for (i = 0; i < res.data.length; i++) {
             let tableEntry = `
                 <tr>
@@ -127,4 +124,12 @@ function getAllEntries() {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+/**
+ * Gets the url without the .php file while still adding the directory. Mostly for development
+ */
+function getURL() {
+    let href = window.location.href;
+    return href.substring(0, href.lastIndexOf('/')) + "/";
 }
