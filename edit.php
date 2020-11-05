@@ -14,11 +14,12 @@ if ($_GET['key'] === $dbJSON['key']) {
             [':id' => $data['id']]);
         $previousData = $DB->get();
 
-        $DB->query('UPDATE entries SET content = :content, type = :contentType WHERE id = :id',
-            [':content' => $data['content'], ':contentType' => $data['type'], ':id' => $data['id']]);
+        $DB->query('UPDATE entries SET content = :content, link = :link, type = :contentType WHERE id = :id',
+            [':content' => $data['content'], ':link' => $data['link'], ':contentType' => $data['type'], ':id' => $data['id']]);
 
-        echo 'Bij de entry met het ID ' . $data['id'] . ' is de content nu "' . $data['content'] . '" en het type ' . $data['type'] .
-            ' (hiervoor was de content ' . $previousData['content'] . ', en het type ' . $previousData['type'] . ')';
+        echo 'Bij de entry met het ID ' . $data['id'] . ' is de content "' . $data['content'] . '", de link "' . $data['link'] . '" en het type "' . $data['type'] .
+            '" (hiervoor was de content "' . $previousData['content'] . '", de link "' . $previousData['link'] . '" en het type "' . $previousData['type'] . '")';
+        // TODO: add link
         $DB->close();
     }
 } else {
